@@ -73,8 +73,7 @@ func pixelate_image(img image.Image, new_width int) *image.RGBA {
 }
 
 func main() {
-	clear_screen()
-	terminal := *create_terminal(194, 47)
+	// clear_screen()
 
 	img, err := read_jpeg_image("nighthawks.jpg")
 	if err != nil {
@@ -83,24 +82,5 @@ func main() {
 
 	pixelated_image := pixelate_image(img, 194)
 
-	print_image(pixelated_image, terminal)
-
-	// // Get image bounds
-	// bounds := img.Bounds()
-
-	// // Loop over each pixel
-	// for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
-	// 	for x := bounds.Min.X; x < bounds.Max.X; x++ {
-	// 		pixelColor := img.At(x, y).(color.Color)
-	// 		_ = pixelColor
-
-	// 		// Extract RGBA values from the pixel color
-	// 		// r, g, b, a := pixelColor.RGBA()
-
-	// 		fmt.Print("#")
-	// 		// Print the pixel values (scaled down to 8-bit)
-	// 		// fmt.Printf("Pixel at (%d, %d): R=%d, G=%d, B=%d, A=%d\n", x, y, r>>8, g>>8, b>>8, a>>8)
-	// 	}
-	// 	fmt.Printf("")
-	// }
+	print_image(pixelated_image)
 }

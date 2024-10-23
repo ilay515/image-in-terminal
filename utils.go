@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"image/jpeg"
 	"log"
@@ -30,4 +31,8 @@ func save_jpeg_image(img image.Image, filename string) {
 		log.Fatal(err)
 		os.Exit(1)
 	}
+}
+
+func clear_screen() {
+	fmt.Printf("\033c")
 }

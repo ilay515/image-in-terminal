@@ -9,10 +9,15 @@ import (
 
 func handle_user_input() image.Image {
 	var args struct {
-		URL       string
-		ImagePath string `arg:"positional"`
+		URL         string
+		ClearScreen bool   `arg:"-c,--clear-screen"`
+		ImagePath   string `arg:"positional"`
 	}
 	arg.MustParse(&args)
+
+	if args.ClearScreen {
+		clear_screen()
+	}
 
 	if args.URL != "" && !file_exists(args.ImagePath) {
 		get_image_from_url(args.URL, args.ImagePath)
@@ -31,7 +36,6 @@ func main() {
 
 	screen_width, screen_height := get_screen_size()
 	screen_height -= 2 // for extra lines
-	// clear_screen()
 	pixelated_image := pixelate_image(img, screen_width, screen_height)
 
 	display_image(pixelated_image)

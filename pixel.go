@@ -5,7 +5,7 @@ import (
 	"image/color"
 )
 
-var ASCII_HEIGHT int = 3
+var ASCII_HEIGHT float64 = 2.7
 
 func get_image_ratio(img image.Image) float64 {
 	return float64(img.Bounds().Size().X) / float64(img.Bounds().Size().Y)
@@ -23,6 +23,7 @@ func create_pixelated_image(img image.Image, screen_width int, screen_height int
 
 	width := int(float64(screen_height) * img_ratio * float64(ASCII_HEIGHT))
 	rect := image.Rect(0, 0, width, screen_height)
+
 	return image.NewRGBA(rect)
 }
 
@@ -30,7 +31,7 @@ func compress_pixels_block(original_image image.Image, startx int, starty int, b
 	var rSum, gSum, bSum, aSum uint32
 	var count int
 
-	for y := starty; y < starty+block_size*ASCII_HEIGHT; y++ {
+	for y := starty; y < starty+block_size*int(ASCII_HEIGHT); y++ {
 		for x := startx; x < startx+block_size; x++ {
 			pixelColor := original_image.At(x, y)
 

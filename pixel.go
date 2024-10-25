@@ -55,11 +55,15 @@ func compress_pixels_block(original_image image.Image, startx int, starty int, b
 func pixelate_image(img image.Image, screen_width int, screen_height int) *image.RGBA {
 	pixelated_image := create_pixelated_image(img, screen_width, screen_height)
 
-	block_size := img.Bounds().Size().X / pixelated_image.Bounds().Size().X
+	block_size := float64(img.Bounds().Size().X) / float64(pixelated_image.Bounds().Size().X)
 	bounds := pixelated_image.Bounds()
 	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
 		for x := bounds.Min.X; x < bounds.Max.X; x++ {
-			color := compress_pixels_block(img, x*block_size, y*block_size*ASCII_HEIGHT, block_size)
+			color := compress_pixels_block(
+				img,
+				int(float64(x)*block_size),
+				int(float64(y)*block_size*float64(ASCII_HEIGHT)),
+				int(block_size))
 			pixelated_image.Set(x, y, color)
 		}
 	}
